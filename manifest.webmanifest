@@ -1,0 +1,16 @@
+{
+  "name": "Oxford 3000 English Trainer",
+  "short_name": "Oxford 3000",
+  "lang": "ru",
+  "id": "./index.html",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#f5f7fb",
+  "icons": [
+    {"src":"./data/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"./data/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"},
+    {"src":"./data/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}
+  ]
+}

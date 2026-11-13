@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f5f7fb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Oxford 3000">
+<meta name="description" content="Тренажёр английских слов Oxford 3000 для русскоязычных: уровни A1–B2, карточки, повторение и диктант.">
+<link rel="icon" type="image/svg+xml" href="data/icon.svg">
+<link rel="apple-touch-icon" href="./data/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Oxford 3000 — English Trainer</title>
+<link rel="stylesheet" href="./styles.css">
+
+</head>
+<body data-page="study">
+<header><div class="wrap top">
+ <div class="brand"><div class="brand-mark">O3</div><div class="brand-name">Oxford 3000<span class="brand-sub">ENGLISH WORD TRAINER</span></div></div>
+ <div class="searchbox"><span class="glass">⌕</span><input id="q" type="search" placeholder="Найти слово или перевод…" autocomplete="off"><button class="clear" id="clearSearch" aria-label="Очистить поиск" hidden>×</button></div>
+ <span class="streak" id="stk"></span><div class="quick-tools"><button class="icon-btn text-size-btn" data-a="fontDown" title="Уменьшить текст" aria-label="Уменьшить текст">A−</button><button class="icon-btn text-size-btn" data-a="fontUp" title="Увеличить текст" aria-label="Увеличить текст">A+</button><button class="icon-btn" data-a="thm" id="themeBtn" title="Сменить тему" aria-label="Сменить тему">◐</button></div>
+</div></header>
+<main class="wrap">
+ <nav class="page-tabs" id="pageTabs" aria-label="Разделы сайта">
+  <button class="page-tab active" data-a="pageStudy">📚 Обучение</button>
+  <button class="page-tab" data-a="pageVocab">📖 Словарь · таблица и карточки</button>
+ </nav>
+ <section class="hero">
+  <div><div class="eyebrow">Твой личный словарь</div><h1>Учи английские слова<br>с умом и без спешки</h1><p class="subtitle">Запоминай, повторяй и отслеживай прогресс по уровням CEFR — от A1 до B2.</p></div>
+  <div class="hero-actions"><button class="btn primary" data-a="cards">🃏 Учить слова</button><button class="btn" data-a="dict">✍️ Диктант</button></div>
+ </section>
+ <section class="stats" id="stats"></section>
+ <nav class="levels" id="nav" aria-label="Уровни английского"></nav>
+ <section class="stage-panel" id="stagePanel">
+  <div class="stage-top"><div><div class="stage-title" id="stageTitle"></div><div class="muted" id="stageMeta" style="font-size:12px"></div></div><div class="muted" id="stagePct" style="font-weight:700"></div></div>
+  <div class="progress-line"><i id="stageProgress"></i></div>
+  <div class="stages" id="chips" aria-label="Этапы"></div>
+ </section>
+ <div class="toolbar"><div class="filters" id="filters">
+  <button class="filter active" data-filter="all">Все слова</button><button class="filter" data-filter="0">Новые</button><button class="filter" data-filter="1">Повторить</button><button class="filter" data-filter="2">Знаю</button>
+ </div><div class="toolbar-actions"><button class="btn small" data-a="modeToday">Сегодня</button><button class="btn small" data-a="modeStages">По этапам</button><button class="btn small" data-a="rev">↻ Слабые слова</button><button class="btn small" data-a="allk">✓ Весь этап знаю</button><span class="word-count" id="wordCount"></span></div></div>
+ <section id="list" aria-live="polite"></section>
+ <div class="pager" id="pager"></div>
+ <section id="vocabPage" hidden>
+  <div class="vocab-heading"><div><div class="eyebrow">Весь Oxford 3000</div><h2>Словарь для просмотра</h2><p class="subtitle">Смотри слова и переводы в таблице или тренируйся с переворачивающимися карточками.</p></div></div>
+  <div class="vocab-controls">
+   <input id="vocabSearch" class="vocab-search" type="search" placeholder="Найти английское слово или перевод…">
+   <select id="vocabLevel" class="vocab-select"><option value="all">Все уровни A1–B2</option><option>A1</option><option>A2</option><option>B1</option><option>B2</option></select>
+   <div class="vocab-switch"><button class="btn active" data-a="vocabTable">☷ Таблица</button><button class="btn" data-a="vocabCards">▣ Карточки</button></div>
+  </div>
+  <div class="vocab-language">
+   <span>Первой стороной показывать:</span>
+   <button class="filter active" data-a="frontEnglish">English</button>
+   <button class="filter" data-a="frontRussian">Русский</button>
+   <span class="muted">Нажми на карточку, чтобы перевернуть её</span>
+  </div>
+  <div id="vocabMeta" class="word-count"></div>
+  <div id="vocabContent"></div>
+  <div class="vocab-pagination" id="vocabPagination"></div>
+ </section>
+</main>
+<footer><div class="wrap">
+ <b>Твой прогресс сохраняется автоматически</b> в этом браузере. <span id="saveState" role="status" aria-live="polite">Загрузка хранилища…</span> Для переноса на другое устройство скачай резервную копию.
+ <div class="footer-actions"><button class="btn small" data-a="exp">💾 Скачать прогресс</button><button class="btn small" data-a="imp">📂 Загрузить прогресс</button><button class="btn small" data-a="data">⚙ Данные и настройки</button><input type="file" id="fi" accept=".json" hidden></div>
+ <span>Статусы: ○ новое → ↻ повторить → ✓ знаю. Нажми на значок слева от слова, чтобы изменить статус. <span id="speechStatus">Произношение — голос устройства (US English).</span></span>
+</div></footer>
+<div id="dlg" role="dialog" aria-modal="true" aria-label="Окно тренажёра" hidden><div class="dialog" id="dbody"></div></div><div id="toast"></div>
+<script src="./bootstrap.js"></script>
+
+</body></html>
