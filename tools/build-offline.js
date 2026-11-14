@@ -6,4 +6,4 @@ const data={};for(const l of ['A1','A2','B1','B2'])data[l]=JSON.parse(fs.readFil
 const safe=s=>s.replace(/<\/script/gi,'<\\/script').replace(/</g,'\\u003c');
 const scripts='<script>window.OX3K_LEGACY_MAP='+safe(JSON.stringify(map.mapping))+';window.OX3K_LEVEL_COUNTS='+JSON.stringify(map.levelCounts)+';window.OX3K_DATA='+safe(JSON.stringify(data))+';</script>\n<script>'+core.replace(/<\/script/gi,'<\\/script')+'</script>\n<script>'+app.replace(/<\/script/gi,'<\\/script')+'</script>';
 const standalone=html.replace('<link rel="stylesheet" href="./styles.css">','<style>\n'+css+'</style>').replace('<link rel="manifest" href="manifest.webmanifest">','').replace('<link rel="icon" type="image/svg+xml" href="data/icon.svg">','').replace('<link rel="apple-touch-icon" href="./data/icon-180.png">','').replace('<script src="./bootstrap.js"></script>',()=>scripts);
-fs.writeFileSync(path.join(root,'offline.html'),standalone,'utf8');console.log('Built offline.html');
+fs.writeFileSync(path.join(root,'offline.html'),standalone.replace(/[ \t]+$/gm,''),'utf8');console.log('Built offline.html');
